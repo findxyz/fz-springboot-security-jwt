@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>首页</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" th:inline="javascript">
+        /*<![CDATA[*/
+        $(function () {
+            $("#loginBtn").click(function () {
+                window.location = "/api/login";
+            });
+
+            $("#logoutBtn").click(function () {
+                $.post("/api/logout", {}, function (json) {
+                    if (json.success) {
+                        window.location = "/api/";
+                    }
+                }, "json");
+            });
+        });
+        /*]]>*/
+    </script>
+</head>
+<body>
+<input id="loginBtn" type="button" value="登录"/>
+<input id="logoutBtn" type="button" value="退出"/>
+<ul>
+    <li><a th:href="@{hello/hi}">hello/hi</a></li>
+    <li><a th:href="@{abc/}">abc/</a></li>
+    <li><a th:href="@{user/versionUpdate}">user/versionUpdate</a></li>
+    <li><a href="http://localhost:12010/management/beans">/management/beans</a></li>
+    <li><a href="http://localhost:12010/management/env">/management/env</a></li>
+    <li><a href="http://localhost:12010/management/metrics">/management/metrics</a></li>
+    <li><a href="http://localhost:12010/management/trace">/management/trace</a></li>
+    <li><a href="http://localhost:12010/management/info">/management/info</a></li>
+    <li><a href="http://localhost:12010/management/health">/management/health</a></li>
+</ul>
+</body>
+</html>

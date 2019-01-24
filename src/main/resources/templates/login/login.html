@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>登录</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" th:inline="javascript">
+        /*<![CDATA[*/
+        $(function () {
+            $("#loginBtn").click(function () {
+                $.post('/api/login', {
+                    username: $("#username").val() || "",
+                    password: $("#password").val() || ""
+                }, function (json) {
+                    if (json.success) {
+                        window.location = '/api/';
+                    } else {
+                        alert(json.message);
+                    }
+                }, 'json');
+            });
+        });
+        /*]]>*/
+    </script>
+</head>
+<body>
+<div>
+    <form>
+        <div>
+            <label for="username" style="width: 75px; display: inline-block; text-align: right">用户名：</label>
+            <input id="username" name="username"/>
+        </div>
+        <div>
+            <label for="password" style="width: 75px; display: inline-block; text-align: right">密码：</label>
+            <input id="password" name="password" type="password"/>
+        </div>
+        <div>
+            <input id="loginBtn" type="button" value="登录"/>
+        </div>
+    </form>
+</div>
+</body>
+</html>
